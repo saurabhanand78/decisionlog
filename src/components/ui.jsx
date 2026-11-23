@@ -6,13 +6,16 @@ import {
 import { STATUS } from '../lib/logic'
 
 // ---------- Category badge ----------
+// Single source of truth for category colours: used by the bar chart AND the badges.
+// Deliberately avoids the outcome donut's green / indigo / rose so the two charts
+// never share a colour. `color` is the chart fill; `text` is a darker shade for badge text.
 const CATEGORY_STYLES = {
-  Career: { cls: 'bg-violet-50 text-violet-700 ring-violet-200', icon: Briefcase, color: '#8b5cf6' },
-  Finance: { cls: 'bg-emerald-50 text-emerald-700 ring-emerald-200', icon: Wallet, color: '#10b981' },
-  Technology: { cls: 'bg-sky-50 text-sky-700 ring-sky-200', icon: Laptop, color: '#0ea5e9' },
-  Learning: { cls: 'bg-amber-50 text-amber-700 ring-amber-200', icon: GraduationCap, color: '#f59e0b' },
-  Personal: { cls: 'bg-pink-50 text-pink-700 ring-pink-200', icon: Heart, color: '#ec4899' },
-  Other: { cls: 'bg-slate-100 text-slate-600 ring-slate-200', icon: MoreHorizontal, color: '#94a3b8' },
+  Career: { color: '#0ea5e9', text: '#0369a1', icon: Briefcase }, // sky
+  Finance: { color: '#eab308', text: '#854d0e', icon: Wallet }, // yellow
+  Technology: { color: '#a855f7', text: '#7e22ce', icon: Laptop }, // purple
+  Learning: { color: '#0e7490', text: '#155e75', icon: GraduationCap }, // deep cyan
+  Personal: { color: '#ea580c', text: '#c2410c', icon: Heart }, // orange
+  Other: { color: '#94a3b8', text: '#475569', icon: MoreHorizontal }, // slate
 }
 
 export const categoryColor = (c) => (CATEGORY_STYLES[c] || CATEGORY_STYLES.Other).color
@@ -21,7 +24,10 @@ export function CategoryBadge({ category }) {
   const s = CATEGORY_STYLES[category] || CATEGORY_STYLES.Other
   const Icon = s.icon
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${s.cls}`}>
+    <span
+      className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium"
+      style={{ backgroundColor: `${s.color}1f`, color: s.text, boxShadow: `inset 0 0 0 1px ${s.color}55` }}
+    >
       <Icon size={12} /> {category}
     </span>
   )

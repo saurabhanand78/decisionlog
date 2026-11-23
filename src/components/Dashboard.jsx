@@ -4,9 +4,7 @@ import {
 } from 'recharts'
 import { AlertTriangle, BookOpen, CheckCircle2, ClipboardCheck, ListChecks, Plus, ThumbsUp, Timer } from 'lucide-react'
 import { computeStats, formatDate, getStatus, relativeReview, todayISO } from '../lib/logic'
-import {
-  CategoryBadge, EmptyState, PageHeader, RATING_COLORS, StatusBadge, categoryColor,
-} from './ui'
+import { CategoryBadge, EmptyState, PageHeader, RATING_COLORS, StatusBadge, categoryColor } from './ui'
 
 function KpiCard({ icon: Icon, label, value, hint, tone }) {
   const tones = {
